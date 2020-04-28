@@ -2,7 +2,7 @@ class Assignment < ApplicationRecord
   include AppHelpers::Validations
   include AppHelpers::Deletions
 
-  # Relationships
+  # Relationships 
   belongs_to :store
   belongs_to :employee
   belongs_to :pay_grade
