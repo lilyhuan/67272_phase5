@@ -14,8 +14,16 @@
     <header>
     <!-- Partials for the topbar and navigation -->
     <%= render :partial => "partials/topbar" %>
-    <%= render :partial => "partials/nav" %>
+
+    <% if logged_in? %>
+      <%= render :partial => "partials/nav" %>
+    <% else %>
+      <%= render :partial => "partials/nav_guest" %>
+    <% end %>
+
     </header>
+
+    
     <main>
     <div class="container">
       <div class="row">

@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   resources :stores
   resources :assignments
 
+  # Authorizations
+  resources :sessions
+  get 'login' => 'sessions#new', :as => :login
+  get 'logout' => 'sessions#destroy', :as => :logout
+
   # Custom routes
   patch 'assignments/:id/terminate', to: 'assignments#terminate', as: :terminate_assignment
 
