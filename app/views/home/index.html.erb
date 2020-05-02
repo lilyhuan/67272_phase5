@@ -1,3 +1,7 @@
+<% if logged_in? && ( current_user.role?(:admin) ) %>
+    <%= render :partial => "partials/dashboard" %>
+<% else %>
+
 <h5>A&M Creamery Home</h5>
 
 <p>This is our very creative home page.</p>
@@ -11,3 +15,5 @@
 <p>What are you still doing here?  Can't you follow instructions?</p>
 	
 <%# render :partial => 'general_home' %>
+<% end %>
+

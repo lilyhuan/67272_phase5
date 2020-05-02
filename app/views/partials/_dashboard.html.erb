@@ -1,0 +1,46 @@
+<div class="container">
+<div class="row">
+  <div class="small-8 columns">
+    <div class="card">
+    <div class="card-content">
+        <h4>Store Status</h4>
+
+        <% if @active_stores.empty? %>
+        <p>There are no active stores at this time.</p>
+        <% else %>
+
+        <table class="striped highlight">
+            <thead>
+            <th>Name</th>
+            <th>Current Assignments</th>
+            <th>Phone</th>
+            <th class="align_center">Options</th>
+            <th>Issues</th>
+            <th>Generate Payroll</th>
+            </thead>
+            <% @active_stores.each do |store| %>
+            <tr>
+                <td><%= link_to store.name, store_path(store) %></td>
+                <td><%= store.assignments.current.count %></td>
+                <td><%= number_to_phone store.phone %></td>
+
+                <td class="align_center">
+                <%= link_to edit_store_path(store) do %>
+                    <i class="material-icons">edit</i>
+                <% end %>
+                </td>
+
+                <td><%= store.shifts.past.select{ |s| s.status == 'pending' }.count %></td>
+                <td>generate link...somehow</td>
+            </tr>
+            <% end %>
+        </table>
+        <p class="supertiny"></p>
+        <br />
+        <%= will_paginate @active_stores, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+        <% end %>
+    </div>
+    </div>
+</div>
+</div>
+</div>
