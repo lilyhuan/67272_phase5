@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="card-content">
+    <h5>Jobs Completed</h5>
+
+    <% if @shift_jobs.empty? %>
+      <p>The manager has not completed the report yet.</p>
+    <% else %>
+
+      <table class="striped highlight">
+        <% @shift_jobs.each do |sj| %>
+          <tr %>
+            <td><%= sj.job.name %></td>
+          </tr>
+        <% end %>
+      </table>
+      <p class="supertiny"></p>
+      <br />
+    <% end %>
+  </div>
+</div>

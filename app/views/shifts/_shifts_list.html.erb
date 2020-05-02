@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="card-content">
+    <h5><%= state.capitalize %> Shifts</h5>
+
+    <% if shifts.empty? %>
+      <p>There are no <%= state.downcase %> shifts at this time.</p>
+    <% else %>
+
+      <table class="striped highlight">
+        <thead>
+          <th>Employee</th>
+          <th>Date</th>
+          <th>Starting</th>
+          <th>Options</th>
+        </thead>
+        <% shifts.each do |shift| %>
+          <tr %>
+            <td><%= link_to shift.employee.name, shift_path(shift) %></td>
+            <td><%= shift.date.strftime("%-m/%-d") %></td>
+            <td><%= shift.start_time.strftime("%l:%M %P") %></td>
+
+            <td>
+              <%= link_to edit_shift_path(shift) do %>
+                <i class="material-icons">edit</i>
+              <% end %>
+            
+
+            <%= link_to(shift_path(shift), method: :delete, data: { confirm: 'Are you sure you wish to delete this shift?' }) do %>
+                <i class="material-icons">delete</i>
+            <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <p class="supertiny"></p>
+      <br />
+    <% end %>
+  </div>
+</div>

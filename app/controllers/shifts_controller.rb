@@ -5,13 +5,13 @@ class ShiftsController < ApplicationController
     
     def index
       if current_user.role?(:employee)
-        @pending_shifts = current_user.shifts.pending.chronological.paginate.per_page(10)
+        @pending_shifts = current_user.shifts.pending.chronological.paginate(page: params[:page]).per_page(10)
         @started_shifts = current_user.shifts.started.chronological.paginate(page: params[:page]).per_page(10)
         @finished_shifts = current_user.shifts.finished.chronological.paginate(page: params[:page]).per_page(10)
         @completed_shifts = current_user.shifts.completed.chronological.paginate(page: params[:page]).per_page(10)
         @incompleted_shifts = current_user.shifts.incomplete.chronological.paginate(page: params[:page]).per_page(10)
       else
-        @pending_shifts = Shift.pending.chronological.paginate.per_page(10)
+        @pending_shifts = Shift.pending.chronological.paginate(page: params[:page]).per_page(10)
         @started_shifts = Shift.started.chronological.paginate(page: params[:page]).per_page(10)
         @finished_shifts = Shift.finished.chronological.paginate(page: params[:page]).per_page(10)
         @completed_shifts = Shift.completed.chronological.paginate(page: params[:page]).per_page(10)
@@ -21,6 +21,7 @@ class ShiftsController < ApplicationController
     end
   
     def show
+        @shift_jobs = @shift.shift_jobs
     end
   
     def new

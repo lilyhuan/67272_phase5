@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-content">
+    <p>
+      <h4>
+        <%= link_to @shift.employee.name, employee_path(@shift.employee) %>'s Shift
+      </h4>
+    </p>
+
+    <p>
+      <b>Date:</b><br>
+      <%= @shift.date %><br />
+    </p><br />
+
+    <p>
+      <b>Start time:</b><br>
+      <%= @shift.start_time.strftime("%H:%M") %> <br>
+      <b>End time:</b><br>
+      <%= @shift.end_time.strftime("%H:%M") %>
+    </p><br />
+
+    <p>
+      <b>Notes:</b><br>
+      <%= 'n/a' if @shift.notes.empty? %>
+      <%= @shift.notes %>
+    </p><br />
+
+    <p>
+      <b>Status:</b>
+      <%= @shift.status %> <br>
+      <%= @shift.report_completed? ? "Job report completed" : "Job report not completed" %>
+    </p><br />
+  </div>
+</div>

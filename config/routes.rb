@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :stores
   resources :assignments
 
+  resources :shifts
+
   # Authorizations
   resources :sessions
   get 'login' => 'sessions#new', :as => :login
