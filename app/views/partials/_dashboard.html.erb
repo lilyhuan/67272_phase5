@@ -15,10 +15,10 @@
             <th>Current Assignments</th>
             <th>Phone</th>
             <th class="align_center">Options</th>
-            <th>Issues</th>
+            <th>Missed Shifts</th>
             <th>Generate Payroll</th>
             </thead>
-            <% @active_stores.each do |store| %>
+            <% @active_stores.each_with_index do |store, i| %>
             <tr>
                 <td><%= link_to store.name, store_path(store) %></td>
                 <td><%= store.assignments.current.count %></td>
@@ -30,7 +30,7 @@
                 <% end %>
                 </td>
 
-                <td><%= store.shifts.past.select{ |s| s.status == 'pending' }.count %></td>
+                <td><%= @issues[i] %></td>
                 <td>generate link...somehow</td>
             </tr>
             <% end %>

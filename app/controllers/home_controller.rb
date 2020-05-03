@@ -2,7 +2,8 @@ class HomeController < ApplicationController
   before_action :check_login
   def index
     @active_stores = Store.active.alphabetical.paginate(page: params[:page]).per_page(10)
-  
+    @issues = Array.new
+    Store.active.alphabetical.each{ |s| @issues << s.shifts.past.select{|x| x.status == 'pending'}.count}
     @upcoming_shifts = Shift.for_employee(current_user).upcoming.pending.chronological
     @shifts_today = Shift.for_employee(current_user).for_dates(DateRange.new(Date.current, Date.current))
   end
