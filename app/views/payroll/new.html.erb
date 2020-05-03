@@ -1,0 +1,17 @@
+<div class="card">    
+  <div class="card-content">
+    <%= simple_form_for(:payroll) do |f| %>
+      <%= f.error_notification %>
+      <div class="row">
+        <div class="form-inputs">
+          <%= f.input :date_range, input_html: { class: 'datepicker' } %>
+          
+    </div>
+  </div>
+</div>
+  <div class="row">
+    <div class="form-actions col s7">
+      <%= f.button :submit %>
+    </div>
+  </div>
+<% end %>

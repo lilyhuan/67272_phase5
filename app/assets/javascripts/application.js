@@ -49,4 +49,5 @@ $(document).ready(function() {
 // dropdown menu
 $( document ).ready(function () {
   $('.timepicker').timepicker();
+  $('.datepicker').datepicker();
 })

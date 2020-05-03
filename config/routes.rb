@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   resources :jobs
   resources :shift_jobs
 
+  resources :payroll
+
   # Authorizations
   resources :sessions
   get 'login' => 'sessions#new', :as => :login

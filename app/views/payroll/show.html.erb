@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col s8">
+    <!-- primary partial gets displayed here in main div -->
+    <div class="card">
+        <div class="card-content">
+            <p>
+            <h4>
+                <%= link_to @store.name, store_path(@store.name) %>'s Payroll
+            </h4>
+            </p>
+
+
+            <table class="striped highlight">
+            <thead>
+              <th>Employee</th>
+              <th>Hours</th>
+              <th>Pay Earned</th>
+            </thead>
+            <% @payroll.each do |emp| %>
+              <tr %>
+                <td><%= emp.employee_name %></td>
+                <td><%= emp.hours %></td>
+                <td><%= emp.pay_earned %></td>
+              </tr>
+            <% end %>
+            <tr>
+            <td></td>
+            <td>Total</td>
+            <td>???</td>
+            <tr>
+          </table>
+
+            
+        </div>
+        
+  </div>
+</div>
+
+<div class="col s4">
+<!-- render the sidebar, if it exists -->
+<div class="card">
+    <div class="card-content">
+    <h5>Select Time Range</h5>
+
+    
+     <input type="text" class="datepicker" id="start_date">
+    <label for="start_date">Start Date</label>
+
+    <input type="text" class="datepicker" id="end_date">
+    <label for="end_date">End Date</label>
+    
+
+    
+    <select>
+      <option value="" disabled selected>Deafult options</option>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+    </select>
+
+    <%= link_to "Generate", payroll_path(@store.id), class: "waves-effect waves-light btn" %>
+    
+        
+
+    </div>
+        
+</div>
+</div>
+
+</div>

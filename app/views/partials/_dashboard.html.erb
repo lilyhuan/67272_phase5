@@ -31,7 +31,8 @@
                 </td>
 
                 <td><%= @issues[i] %></td>
-                <td>generate link...somehow</td>
+                <td><%= link_to "Generate", payroll_path(store.id) %></td>
+                <td><%= link_to "New", new_payroll_path(store_id: store.id) %></td>
             </tr>
             <% end %>
         </table>
