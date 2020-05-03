@@ -16,7 +16,11 @@
     <%= render :partial => "partials/topbar" %>
 
     <% if logged_in? && ( current_user.role?(:admin) ) %>
-      <%= render :partial => "partials/nav" %>
+      <%= render :partial => "partials/nav_admin" %>
+    <% elsif logged_in? && ( current_user.role?(:manager) ) %>
+      <%= render :partial => "partials/nav_manager" %>
+    <% elsif logged_in? && ( current_user.role?(:employee) ) %>
+      <%= render :partial => "partials/nav_employee" %>
     <% else %>
       <%= render :partial => "partials/nav_guest" %>
     <% end %>
