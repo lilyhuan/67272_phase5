@@ -21,6 +21,9 @@ class Employee < ApplicationRecord
   scope :admins,          -> { where('role = ?', 'admin') }
   scope :alphabetical,    -> { order('last_name, first_name') }
 
+  scope :search, ->(term) { where('first_name LIKE ? OR last_name LIKE ?', "#{term}%", "#{term}%") }
+
+
   # Validations
   validates_presence_of :first_name, :last_name, :ssn
   validates_date :date_of_birth, :on_or_before => lambda { 14.years.ago }, on_or_before_message: 'must be at least 14 years old'
