@@ -9,6 +9,12 @@ class AssignmentsController < ApplicationController
       @past_assignments = Assignment.past.chronological.paginate(page: params[:page]).per_page(10)
   end
 
+  def show
+    @finished_shifts = @assignment.shifts.finished
+    @pending_shifts = @assignment.shifts.pending
+    @started_shifts = @assignment.shifts.started
+  end
+
   def new
     @assignment = Assignment.new
     @assignment.employee_id = params[:employee_id] unless params[:employee_id].nil?

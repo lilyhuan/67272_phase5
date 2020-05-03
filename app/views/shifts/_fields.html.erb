@@ -1,4 +1,4 @@
-<%= f.input :assignment_id, collection: Employee.alphabetical.active.to_a, include_blank: true %>
+<%= f.input :assignment_id, collection: Employee.alphabetical.active.to_a, include_blank: true  %>
 <%= f.input :date, label_html: { class: 'active' } %>
 <%= f.input :start_time, input_html: { class: 'timepicker' } %>
 <%= f.input :notes, label_html: { class: 'active' } %>

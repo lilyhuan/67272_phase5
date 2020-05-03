@@ -1,0 +1,29 @@
+
+
+<% unless @finished_shifts.empty? %>
+<div class="card">
+  <div class="card-content">
+    <h5>Finished Shifts</h5>
+
+    <table class="striped highlight">
+      <thead>
+        <th>Date</th>
+        <th>Start Time</th>
+        <th>Duration</th>
+      </thead>
+      <% @finished_shifts.each do |shift| %>
+        <tr %>
+          <td><%= link_to shift.date.strftime("%-m/%-d/%y"), shift_path(shift) %></td>
+          <td><%= shift.start_time.strftime("%H:%M") %></td>
+          <td><%= shift.duration %></td>
+        </tr>
+      <% end %>
+    </table>
+    <p class="supertiny"></p>
+    <br />
+  </div>
+
+</div>
+<% else %>
+
+<% end %>

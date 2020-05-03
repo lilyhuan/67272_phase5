@@ -39,6 +39,11 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def destroy
+    @employee.destroy
+    redirect_to employees_path, notice: "Removed employee from the system."
+  end
+
 
   private
   # Use callbacks to share common setup or constraints between actions.

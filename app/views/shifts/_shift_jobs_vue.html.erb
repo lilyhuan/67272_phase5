@@ -1,0 +1,62 @@
+<div id="shift_job_handling">
+  <%= hidden_field_tag "shift_id", @shift.id %>
+  <% unless @shift_jobs.empty? %>
+    <div class="card yellow lighten-4">
+      <div class="card-content">
+        <span class="card-title">Jobs completed</span>
+        <ul is='job-row' 
+            v-for="job in jobs" 
+            v-bind:dosage="job"
+            class="no_bullet">  
+        </ul>
+      </div>
+      <% if can? :new, ShiftJob %>
+        <div class="card-action">
+          <!-- Could bind title based on state, but chance to show v-else directive -->
+          <div v-if="modal_open">
+            <%= link_to "Cancel shift job", "#", {%s(v-on:click) => "switch_modal()"} %>
+          </div>
+          <div v-else>
+            <%= link_to "Add a new shift job", "#", {%s(v-on:click) => "switch_modal()"} %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <% if can? :new, ShiftJob %>
+      <div class="card grey lighten-3">
+        <div class="card-action">
+          <!-- Note in class that message not consistent with activity -->
+          <%= link_to "Add a new shift job", "#", {%s(v-on:click) => "switch_modal()"} %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>  
+
+  <div v-if="modal_open">
+    <new-shift-job-form></new-shift-job-form>
+  </div>
+
+</div> <!-- End of div#dosage_handling -->
+
+
+<!-- Defining Vue templates to work with components -->
+<script type="text/x-template" id="dosage-row">
+  // Commenting this out b/c template in js file, but if I wanted it here...
+  // <li>
+  //   <a v-on:click="remove_record(dosage)" class="remove">x&nbsp;&nbsp;</a>
+  //   {{ dosage.medicine_name }}:&nbsp;&nbsp;
+  //   {{ dosage.units_given }}&nbsp;units
+  // </li>
+</script>
+
+<!--  much easier to include this complicated template here 
+      rather than in the js file (IMO) -->
+<script type="text/x-template" id="shift-job-form-template">
+  <%= render "shift_job_form_template", locals: {employee: @employee, shift: @shift, shift_job: ShiftJob.new} %>
+</script>
+
+
+
+
+

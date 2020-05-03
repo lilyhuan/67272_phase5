@@ -1,0 +1,48 @@
+<div class="card">
+  <div class="card-content">
+    <h4><%= @assignment.employee.proper_name %>'s Assignment</h4>
+
+    <b>Store Name:&nbsp;&nbsp;</b><br>
+    <%= link_to @assignment.store.name, store_path(@assignment.store) %><br />
+
+    <b>Dates:&nbsp;&nbsp;</b><br>
+    <%= @assignment.start_date.strftime("%-m/%-d/%y") %> - <%= @assignment.end_date.nil? ? 'Present' : @assignment.end_date.strftime("%-m/%-d/%y") %>
+
+  </div>
+</div>
+
+
+
+<% unless @pending_shifts.empty? %>
+<div class="card">
+  <div class="card-content">
+    <h5>Upcoming Shifts</h5>
+
+    <table class="striped highlight">
+      <thead>
+        <th>Date</th>
+        <th>Start Time</th>
+        <th>Duration</th>
+      </thead>
+      <% @pending_shifts.each do |shift| %>
+        <tr %>
+          <td><%= shift.date.strftime("%-m/%-d/%y") %></td>
+          <td><%= shift.start_time.strftime("%H:%M") %></td>
+          <td><%= shift.duration %></td>
+        </tr>
+      <% end %>
+    </table>
+    <p class="supertiny"></p>
+    <br />
+  </div>
+  <div class="card-action">
+    <%= link_to "New Shift", new_shift_path(assignment_id: @assignment.id) %>
+  </div>
+</div>
+<% else %>
+<div class="card grey lighten-3">
+  <div class="card-action">
+    <%= link_to "New Shift", new_shift_path(assignment_id: @assignment.id) %>
+  </div>
+</div>
+<% end %>
