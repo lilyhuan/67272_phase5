@@ -1,0 +1,75 @@
+<div class="container">
+<div class="row">
+  <div class="small-8 columns">
+    <div class="card">
+    <div class="card-content">
+        <h4>Shift(s) Today</h4>
+
+        <% if @shifts_today.empty? %>
+        <p>You have no shifts today.</p>
+        <% else %>
+
+        <table class="striped highlight">
+            <thead>
+            <th>Date</th>
+            <th>Employee</th>
+            <th>Location</th>
+            <th>Starting</th>
+            <th>Ending</th>
+            </thead>
+            <% @shifts_today.each do |shift| %>
+            <tr>
+                <td><%= link_to shift.date, shift_path(shift) %></td>
+                <td><%= link_to shift.employee.name, employee_path(shift.employee) %></td>
+                <td><%= shift.store.name %></td>
+                <td><%= shift.start_time.strftime("%l:%M %P") %></td>
+                <td><%= shift.end_time.strftime("%l:%M %P") %></td>
+                <% if shift.status == 'pending' %>
+                    <td><%= link_to "Clock In", clock_in_path(shift), method: :patch %>
+                <% elsif shift.status == 'started' %>
+                    <td><%= link_to "Clock Out", clock_out_path(shift), method: :patch %>
+                <% end %>
+            </tr>
+            <% end %>
+        </table>
+        <p class="supertiny"></p>
+        <br />
+        <% end %>
+    </div>
+    </div>
+
+  
+    <div class="card">
+    <div class="card-content">
+        <h4>Upcoming Shifts</h4>
+
+        <% if @upcoming_shifts.empty? %>
+        <p>You have no upcoming shifts at this time.</p>
+        <% else %>
+
+        <table class="striped highlight">
+            <thead>
+            <th>Date</th>
+            <th>Employee</th>
+            <th>Location</th>
+            <th>Starting</th>
+            <th>Ending</th>
+            </thead>
+            <% @upcoming_shifts.each do |shift| %>
+            <tr>
+                <td><%= link_to shift.date, shift_path(shift) %></td>
+                <td><%= link_to shift.employee.name, employee_path(shift.employee) %></td>
+                <td><%= shift.store.name %></td>
+                <td><%= shift.start_time.strftime("%l:%M %P") %></td>
+                <td><%= shift.end_time.strftime("%l:%M %P") %></td>
+            </tr>
+            <% end %>
+        </table>
+        <p class="supertiny"></p>
+        <br />
+        <% end %>
+    </div>
+    </div>
+</div>
+</div>
+</div>

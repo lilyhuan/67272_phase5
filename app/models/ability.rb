@@ -73,7 +73,9 @@ class Ability
   
   
       elsif user.role? :employee
-        can :index, Assignment
+        can :index, Assignment do |a|
+          user.assignments.include? a
+        end
 
         # they can read their own assignment details
         can :show, Assignment do |a|  
@@ -95,6 +97,10 @@ class Ability
 
         can :index, Shift do |s|  
           user.shifts.include? s.id
+        end
+        
+        can :show, Shift do |s|  
+          user.id == s.employee.id
         end
         
       else

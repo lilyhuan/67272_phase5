@@ -2,7 +2,7 @@
     <%= render :partial => "partials/dashboard" %>
     
 <% elsif logged_in? && ( current_user.role?(:employee) ) %>
-    <h5>Upcoming Shifts</h5>
+    <%= render :partial => "partials/dashboard_employee" %>
 <% else %>
 
 <h5>A&M Creamery Home</h5>

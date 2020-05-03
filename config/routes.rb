@@ -25,6 +25,8 @@ Rails.application.routes.draw do
 
   # Custom routes
   patch 'assignments/:id/terminate', to: 'assignments#terminate', as: :terminate_assignment
+  patch 'home/:id/clock_in', to: 'home#clock_in', as: :clock_in
+  patch 'home/:id/clock_out', to: 'home#clock_out', as: :clock_out
 
   # You can have the root of your site routed with 'root'
   root 'home#index'

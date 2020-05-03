@@ -19,6 +19,7 @@ class ShiftsController < ApplicationController
       end
 
     end
+
   
     def show
         @shift_jobs = @shift.shift_jobs
