@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-content">
+    <h4><%= state.capitalize %> Pay Grade Rates</h4>
+
+    <% if pay_grade_rates.empty? %>
+      <p>There are no <%= state.downcase %> pay grade rates at this time.</p>
+    <% else %>
+
+      <table class="striped highlight">
+        <thead>
+          <th>Pay Grade</th>
+          <th>Rate</th>
+          <th>Start Date</th>
+          <% if state == 'past' %>
+            <th>End Date</th>
+          <% end %>
+        </thead>
+        <% pay_grade_rates.each do |pay_grade_rate| %>
+          <tr>
+            <td><%= link_to pay_grade_rate.pay_grade.level, pay_grade_path(pay_grade_rate.pay_grade) %></td>
+            <td><%= pay_grade_rate.rate %></td>
+            <td><%= pay_grade_rate.start_date %></td>
+            <% if state == 'past' %>
+                <td><%= pay_grade_rate.end_date %></td>
+            <% end %>
+        <% end %>
+      </table>
+      <p class="supertiny"></p>
+      <br />
+      <%= will_paginate pay_grade_rates, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+    <% end %>
+  </div>
+</div>
