@@ -49,6 +49,8 @@ class ShiftsController < ApplicationController
     end
 
     def destroy
+      @shift.destroy
+      redirect_to shifts_path, notice: "Removed shift from the system."
     end
   
   

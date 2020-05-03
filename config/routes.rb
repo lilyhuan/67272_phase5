@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :shifts
   resources :pay_grades
   resources :pay_grade_rates
+  resources :jobs
 
   # Authorizations
   resources :sessions

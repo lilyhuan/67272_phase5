@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-content">
+    <p>
+      <h4>
+        <%= @job.name %>
+      </h4>
+    </p>
+
+    <p>
+      <b>Description:</b><br>
+      <%= @job.description %><br />
+    </p><br />
+
+    <p>
+      <b>Active:</b> 
+      <%= @job.active ? "Yes" : "No" %>
+    </p><br />
+  </div>
+</div>
