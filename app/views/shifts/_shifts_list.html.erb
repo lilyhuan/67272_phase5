@@ -8,15 +8,16 @@
 
       <table class="striped highlight">
         <thead>
-          <th>Employee</th>
           <th>Date</th>
+          <th>Employee</th>
           <th>Starting</th>
           <th>Options</th>
         </thead>
         <% shifts.each do |shift| %>
           <tr %>
-            <td><%= link_to shift.employee.name, shift_path(shift) %></td>
-            <td><%= shift.date.strftime("%-m/%-d") %></td>
+            <td><%= link_to shift.date.strftime("%-m/%-d"), shift_path(shift) %></td>
+            <td><%= link_to shift.employee.name, employee_path(shift.employee) %></td>
+            
             <td><%= shift.start_time.strftime("%l:%M %P") %></td>
 
             <td>
@@ -34,6 +35,8 @@
       </table>
       <p class="supertiny"></p>
       <br />
+
+      <%= will_paginate shifts, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
     <% end %>
   </div>
 </div>

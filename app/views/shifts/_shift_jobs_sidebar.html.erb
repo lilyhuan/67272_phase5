@@ -1,20 +1,34 @@
-<div class="card">
-  <div class="card-content">
-    <h5>Jobs Completed</h5>
 
-    <% if @shift_jobs.empty? %>
-      <p>The manager has not completed the report yet.</p>
-    <% else %>
 
-      <table class="striped highlight">
-        <% @shift_jobs.each do |sj| %>
-          <tr %>
-            <td><%= sj.job.name %></td>
-          </tr>
+<% unless @shift_jobs.empty? %>
+  <div class="card yellow lighten-4">
+    <div class="card-content">
+      <span class="card-title">Jobs completed</span>
+      <ul>
+        <% for shift_job in @shift_jobs %>
+          <li>
+            <% if can? :destroy, ShiftJob %>
+              <%= link_to(shift_job_path(shift_job), class: 'remove', method: :delete) do %>
+                x&nbsp;&nbsp;
+              <% end %>
+            <% end %>
+            <%= link_to shift_job.job.name, job_path(shift_job.job) %>
+          </li>
         <% end %>
-      </table>
-      <p class="supertiny"></p>
-      <br />
+      </ul>
+    </div>
+    <% if can? :new, ShiftJob %>
+      <div class="card-action">
+        <%= link_to "Add a new job to shift", new_shift_job_path(shift_id: @shift.id) %>
+      </div>
     <% end %>
   </div>
-</div>
+<% else %>
+  <% if can? :new, ShiftJob %>
+    <div class="card grey lighten-3">
+      <div class="card-action">
+        <%= link_to "Add a new job to shift", new_shift_job_path(shift_id: @shift.id) %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
