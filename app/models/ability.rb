@@ -92,6 +92,10 @@ class Ability
         can :update, Employee do |e|  
             user.id == e.id
         end
+
+        can :index, Shift do |s|  
+          user.shifts.include? s.id
+        end
         
       else
         # guests can only read animals covered (plus home pages)
