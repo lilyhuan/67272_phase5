@@ -9,6 +9,9 @@ class PayGradesController < ApplicationController
     end
   
     def show
+      @current_employees = Array.new
+      @pay_grade.assignments.current.each { |e| @current_employees << e.employee}
+      @current_employees = @current_employees.sort_by(&:last_name)
     end
   
     def new

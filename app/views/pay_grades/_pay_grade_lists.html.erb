@@ -1,0 +1,31 @@
+<div class="card">
+  <div class="card-content">
+    <h4><%= state.capitalize %> Pay Grades</h4>
+
+    <% if pay_grades.empty? %>
+      <p>There are no <%= state.downcase %> pay grades at this time.</p>
+    <% else %>
+
+      <table class="striped highlight">
+        <thead>
+          <th>Level</th>
+          <th class="align_center">Options</th>
+        </thead>
+        <% pay_grades.each do |pay_grade| %>
+          <tr>
+            <td><%= link_to pay_grade.level, pay_grade_path(pay_grade) %></td>
+
+            <td class="align_center">
+              <%= link_to edit_pay_grade_path(pay_grade) do %>
+                <i class="material-icons">edit</i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <p class="supertiny"></p>
+      <br />
+      <%= will_paginate pay_grades, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+    <% end %>
+  </div>
+</div>

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :assignments
 
   resources :shifts
+  resources :pay_grades
 
   # Authorizations
   resources :sessions
