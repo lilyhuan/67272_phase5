@@ -3,6 +3,7 @@
     <ul class="left hide-on-med-and-down">
       <li><%= link_to 'Profile', employee_path(current_user.id) %></li>
       <li><%= link_to 'Shifts', shifts_path %></li>
+      <li><%= link_to "Pay Report", payroll_path(current_user) %></li>
     </ul>
     <ul class="right">
       <li><%= link_to 'Logout', logout_path %></li>

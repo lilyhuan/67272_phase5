@@ -1,18 +1,24 @@
 class PayrollController < ApplicationController
-    before_action :set_store, only: [:show, :edit, :update, :destroy]
+    before_action :set, only: [:show, :edit, :update, :destroy]
     before_action :check_login
 
     def index
     end
   
     def show
-        if params[:start_date].nil?
-            params[:start_date] = 1.week.ago.to_date
-            params[:end_date] = Date.current
+        if current_user.role?(:admin)
+            if params[:start_date].nil?
+                params[:start_date] = 1.week.ago.to_date
+                params[:end_date] = Date.current
+            end
+            date_range = DateRange.new(params[:start_date], params[:end_date])
+            @calc = PayrollCalculator.new(date_range)
+            @payroll = @calc.create_payrolls_for(@store)
+        elsif current_user.role?(:employee)
+            date_range = DateRange.new(1.week.ago.to_date, Date.current)
+            @calc = PayrollCalculator.new(date_range)
+            @payroll = @calc.create_payroll_record_for(@employee)
         end
-        date_range = DateRange.new(params[:start_date], params[:end_date])
-        @calc = PayrollCalculator.new(date_range)
-        @payroll = @calc.create_payrolls_for(@store)
     end
 
     def new
@@ -32,8 +38,13 @@ class PayrollController < ApplicationController
   
     private
     # Use callbacks to share common setup or constraints between actions.
-    def set_store
-      @store = Store.find(params[:id])
+    def set
+        if current_user.role?(:admin)
+            @store = Store.find(params[:id])
+        elsif current_user.role?(:employee)
+            @employee = Employee.find(params[:id])
+            @store = @employee.current_assignment.store
+        end
     end
     
     def payroll_params
