@@ -71,13 +71,15 @@
   </div>
 
 
-<% elsif current_user.role?(:employee) %>
+<% elsif current_user.role?(:employee) || current_user.role?(:manager) %>
 
   <div class="row">
     <div class="col s8">
-      <!-- primary partial gets displayed here in main div -->
-      <div class="card">
+      
+    
+        <div class="card">
           <div class="card-content">
+
               <p>
               <h4>
                   <%= link_to @employee.name, employee_path(@employee) %>'s Pay Report for Last 7 Days

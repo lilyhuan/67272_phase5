@@ -14,7 +14,7 @@ class PayrollController < ApplicationController
             date_range = DateRange.new(params[:start_date], params[:end_date])
             @calc = PayrollCalculator.new(date_range)
             @payroll = @calc.create_payrolls_for(@store)
-        elsif current_user.role?(:employee)
+        elsif current_user.role?(:employee) || current_user.role?(:manager)
             date_range = DateRange.new(1.week.ago.to_date, Date.current)
             @calc = PayrollCalculator.new(date_range)
             @payroll = @calc.create_payroll_record_for(@employee)
@@ -41,7 +41,7 @@ class PayrollController < ApplicationController
     def set
         if current_user.role?(:admin)
             @store = Store.find(params[:id])
-        elsif current_user.role?(:employee)
+        elsif current_user.role?(:employee) || current_user.role?(:manager)
             @employee = Employee.find(params[:id])
             @store = @employee.current_assignment.store
         end
