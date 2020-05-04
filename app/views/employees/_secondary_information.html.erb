@@ -1,48 +1,46 @@
 
 
-<% unless @upcoming_shifts.empty? %>
 <div class="card">
   <div class="card-content">
     <h5>Upcoming Shifts</h5>
 
-    <table class="striped highlight">
-      <thead>
-        <th>Date</th>
-        <th>Starting</th>
-      </thead>
-      <% @upcoming_shifts.each do |shift| %>
-        <tr %>
-          <td><%= link_to shift.date.strftime("%-m/%-d/%y"), shift_path(shift) %></td>
-          <td><%= shift.start_time.strftime("%l:%M %P") %></td>
-        <tr>
-      <% end %>
-    </table>
+    <% if @upcoming_shifts.empty? %>
+      <p>You have no upcoming shifts this time.</p>
+    <% else %>
+      <table class="striped highlight">
+        <thead>
+          <th>Date</th>
+          <th>Starting</th>
+        </thead>
+        <% @upcoming_shifts.each do |shift| %>
+          <tr %>
+            <td><%= link_to shift.date.strftime("%-m/%-d/%y"), shift_path(shift) %></td>
+            <td><%= shift.start_time.strftime("%l:%M %P") %></td>
+          <tr>
+        <% end %>
+      </table>
     <p class="supertiny"></p>
     <br />
+    <% end %>
   </div>
-  <div class="card-action">
-  <% if can? :new, eval("Shift") %>
-    <%= link_to "New Shift", new_shift_path(assignment_id: @current_assignment.id) %>
-  <% end %> 
-    </div>
-</div>
-<% else %>
-<div class="card grey lighten-3">
+      
   <div class="card-action">
     <% if can? :new, eval("Shift") %>
-    <%= link_to "New Shift", new_shift_path(assignment_id: @current_assignment.id) %>
-    <% end %>  
+      <%= link_to "New Shift", new_shift_path(assignment_id: @current_assignment.id) %>
+    <% end %> 
+  </div>
+
+
+
+
 </div>
-</div>
-<% end %>
-
-
-
-<% unless @recent_shifts.empty? %>
 <div class="card">
   <div class="card-content">
-    <h5>Past Shifts</h5>
+    <h5>Past Recent Shifts</h5>
 
+    <% if @recent_shifts.empty? %>
+      <p>You have no recent shifts this time.</p>
+    <% else %>
     <table class="striped highlight">
       <thead>
         <th>Date</th>
@@ -55,13 +53,11 @@
         <tr>
       <% end %>
     </table>
+    
     <p class="supertiny"></p>
     <br />
+    <% end %>
   </div>
   
 </div>
-<% else %>
-<div class="card grey lighten-3">
   
-</div>
-<% end %>

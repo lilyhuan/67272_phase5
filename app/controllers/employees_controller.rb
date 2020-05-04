@@ -9,6 +9,21 @@ class EmployeesController < ApplicationController
     @active_employees = Employee.regulars.active.alphabetical.paginate(page: params[:page]).per_page(10)
     @inactive_employees = Employee.inactive.alphabetical.paginate(page: params[:page]).per_page(10)
 
+    if current_user.role?(:manager)
+      # @my_employees = Array.new
+      # @my_employees = current_user.current_assignment.store.employees.alphabetical.paginate(page: params[:page]).per_page(10)
+      # Employee.all do |e|
+      #     my_stores = current_user.stores
+      #     my_stores.each { |my_store|
+      #         @my_employees << my_store.employees
+      #     }
+      # end
+      # @my_employees = @my_employees.flatten
+
+      @my_employees = Assignment.for_store(current_user.current_assignment.store).current.map{|s| s.employee}
+      @my_employees = @my_employees.sort_by{ |x| x.last_name }
+
+    end
   end
 
   def show

@@ -11,6 +11,7 @@
           <th>Name</th>
           <th>Current Assignment</th>
           <th>Phone</th>
+          <th>Role</th>
           <th class="align_center">Options</th>
         </thead>
         <% for employee in employees %>
@@ -18,6 +19,7 @@
             <td><%= link_to employee.name, employee_path(employee) %></td>
             <td><%= employee.current_assignment.nil? ? 'n/a' : link_to(employee.current_assignment.store.name, store_path(employee.current_assignment.store))  %></td>
             <td><%= number_to_phone employee.phone %></td>
+            <td><%= employee.role.capitalize %></td>
 
           <td class="align_center">
             <% if can? :edit, employee %>
