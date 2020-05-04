@@ -1,5 +1,5 @@
 class PayGradeRatesController < ApplicationController
-    before_action :set_pay_grade_rates, only: [:show, :edit, :update, :destroy]
+    before_action :set_pay_grade_rate, only: [:show, :edit, :update, :destroy]
     before_action :check_login
     authorize_resource
   
@@ -21,7 +21,7 @@ class PayGradeRatesController < ApplicationController
     def create
       @pay_grade_rate = PayGradeRate.new(pay_grade_rate_params)
       if @pay_grade_rate.save
-        redirect_to @pay_grade_rate, notice: "Successfully added new rate to the system."
+        redirect_to pay_grade_rates_path, notice: "Successfully added new rate to the system."
       else
         render action: 'new'
       end
@@ -29,7 +29,7 @@ class PayGradeRatesController < ApplicationController
   
     def update
       if @pay_grade_rate.update_attributes(pay_grade_params)
-        redirect_to @pay_grade_rate, notice: "Updated pay grade rate information."
+        redirect_to pay_grade_rates_path, notice: "Updated pay grade rate information."
       else
         render action: 'edit'
       end

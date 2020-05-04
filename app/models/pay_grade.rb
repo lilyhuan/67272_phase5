@@ -17,5 +17,10 @@ class PayGrade < ApplicationRecord
 
   # Callbacks
   before_destroy -> { cannot_destroy_object() }
+
+  # for simpleform
+  def name
+    "#{level}"
+  end
   
 end
