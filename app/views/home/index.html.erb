@@ -5,17 +5,48 @@
     <%= render :partial => "partials/dashboard_employee" %>
 <% else %>
 
-<h5>A&M Creamery Home</h5>
+
+
+<h2>A&M Creamery Home</h2>
 
 <p>This is our very creative home page.</p>
 <p>Now go away.</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>What are you still doing here?  Can't you follow instructions?</p>
+
+
+<div class="container">
+<div class="row">
+  <div class="small-8 columns">
+    <div class="card">
+    <div class="card-content">
+        <h4>Come Visit a Store!</h4>
+
+        <% if @active_stores.empty? %>
+        <p>There are no active stores at this time.</p>
+        <% else %>
+
+        <table class="striped highlight">
+            <thead>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Address</th>
+            </thead>
+            <% @active_stores.each do |store| %>
+            <tr>
+                <td><%= store.name %></td>
+                <td><%= number_to_phone store.phone %></td>
+                <td><%= store.street %> <%= store.city %>, <%= store.state %> <%= store.zip %></td>
+
+            </tr>
+            <% end %>
+        </table>
+        <p class="supertiny"></p>
+        <br />
+        <% end %>
+    </div>
+    </div>
+</div>
+</div>
+</div>
 	
 <%# render :partial => 'general_home' %>
 <% end %>
