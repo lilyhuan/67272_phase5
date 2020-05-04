@@ -7,12 +7,13 @@ class StoresController < ApplicationController
   def index
     # get data on all stores and paginate the output to 10 per page
     @active_stores = Store.active.alphabetical.paginate(page: params[:page]).per_page(10)
-    @inactive_stores = Store.inactive.alphabetical.paginate(page: params[:ipage]).per_page(10)
+    @inactive_stores = Store.inactive.alphabetical.paginate(page: params[:page]).per_page(10)
   end
 
   def show
     @current_managers = @store.assignments.current.map{|a| a.employee}.sort_by{|e| e.name}.select{|e| e.role == 'manager'}
     @current_employees = @store.assignments.current.map{|a| a.employee}.sort_by{|e| e.name}
+    @shifts = @store.shifts.for_next_days(7).chronological.paginate(page: params[:page]).per_page(10)
   end
 
   def new
