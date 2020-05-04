@@ -13,7 +13,7 @@
         </thead>
         <% pay_grades.each do |pay_grade| %>
           <tr>
-            <td><%= link_to pay_grade.level, pay_grade_path(pay_grade) %></td>
+            <td><%= pay_grade.level %></td>
 
             <td class="align_center">
               <%= link_to edit_pay_grade_path(pay_grade) do %>
