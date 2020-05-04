@@ -5,8 +5,13 @@ class AssignmentsController < ApplicationController
 
   def index
     # for phase 3 only
+    if current_user.role?(:admin)
       @current_assignments = Assignment.current.chronological.paginate(page: params[:page]).per_page(10)
       @past_assignments = Assignment.past.chronological.paginate(page: params[:page]).per_page(10)
+    elsif current_user.role?(:manager)
+      @current_assignments = Assignment.for_store(current_user.current_assignment.store).current.chronological.paginate(page: params[:page]).per_page(10)
+      @past_assignments = Assignment.for_store(current_user.current_assignment.store).past.chronological.paginate(page: params[:page]).per_page(10)
+    end
   end
 
   def show
@@ -23,7 +28,7 @@ class AssignmentsController < ApplicationController
   def create
     @assignment = Assignment.new(assignment_params)
     if @assignment.save
-      redirect_to assignments_path, notice: "Successfully added the assignment."
+      redirect_to @assignment, notice: "Successfully added the assignment."
     else
       render action: 'new'
     end
@@ -48,7 +53,7 @@ class AssignmentsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def assignment_params
-    params.require(:assignment).permit(:store_id, :employee_id, :start_date)
+    params.require(:assignment).permit(:store_id, :employee_id, :start_date, :pay_grade_id)
   end
 
 end
