@@ -62,6 +62,11 @@ class Employee < ApplicationRecord
     curr_assignment.first   # return as a single object, not an array
   end
 
+  # for conveniences
+  def missed_shifts
+    return self.shifts.past.pending.count
+  end
+
   # Add in methods for phases 4 & 5 for authentication and payment handling
   include EmployeePayment
   include EmployeeAuthentication

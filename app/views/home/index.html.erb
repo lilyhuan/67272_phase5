@@ -1,8 +1,12 @@
 <% if logged_in? && ( current_user.role?(:admin) ) %>
-    <%= render :partial => "partials/dashboard" %>
+    <%= render :partial => "partials/dashboard_admin" %>
     
 <% elsif logged_in? && ( current_user.role?(:employee) ) %>
     <%= render :partial => "partials/dashboard_employee" %>
+
+<% elsif logged_in? && ( current_user.role?(:manager) ) %>
+    <%= render :partial => "partials/dashboard_manager" %>
+
 <% else %>
 
 

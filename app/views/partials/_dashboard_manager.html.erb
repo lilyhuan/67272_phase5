@@ -1,0 +1,140 @@
+<div class="row">
+<div class="col s8">
+    <div class="card">
+    <div class="card-content">
+        <h4>Your Current Employees</h4>
+
+        <% if @my_employees.empty? %>
+        <p>You have no employees this time.</p>
+        <% else %>
+
+        <table class="striped highlight">
+            <thead>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Missed Shifts</th>
+            
+            </thead>
+            <% for employee in @my_employees %>
+            <tr class="<%= cycle('dg_list_line_odd', 'dg_list_line_even') %>">
+                <td><%= link_to employee.name, employee_path(employee) %></td>
+                <td><%= number_to_phone employee.phone %></td>
+                <td><%= link_to employee.missed_shifts, employee_path(employee) %></td>
+                <td><%= link_to "Assign Shift", new_shift_path(assignment_id: employee.current_assignment) %></td> 
+            </tr>
+            <% end %>
+        </table>
+        <p class="supertiny"></p>
+        <br />
+        <% end %>
+    </div>
+    </div>
+</div>
+
+
+<div class="col s4">
+    <div class="card">
+    <div class="card-content">
+        <h4>Incomplete Job Reports</h4>
+
+        <% if @incomplete_shifts.empty? %>
+        <p>You have no incomplete job reports at this time.</p>
+        <% else %>
+
+        <table class="striped highlight">
+        <thead>
+        <th>Date</th>
+        <th>Employee</th>
+        <th>Starting</th>
+        </thead>
+        <% @incomplete_shifts.each do |shift| %>
+        <tr>
+            <td><%= link_to shift.date.strftime("%m/%d"), shift_path(shift) %></td>
+            <td><%= link_to shift.employee.name, employee_path(shift.employee) %></td>
+            <td><%= shift.start_time.strftime("%l:%M %P") %></td>
+        </tr>
+        <% end %>
+    </table>
+        <p class="supertiny"></p>
+        <br />
+        <% end %>
+    </div>
+    </div>
+</div>
+
+
+</div>
+
+<div class="container">
+<div class="row">
+  <div class="small-8 columns">
+    <div class="card">
+    <div class="card-content">
+        <h4>Shift(s) Today</h4>
+
+        <% if @shifts_today.empty? %>
+        <p>You have no shifts today.</p>
+        <% else %>
+
+        <table class="striped highlight">
+            <thead>
+            <th>Date</th>
+            <th>Employee</th>
+            <th>Location</th>
+            <th>Starting</th>
+            <th>Ending</th>
+            </thead>
+            <% @shifts_today.each do |shift| %>
+            <tr>
+                <td><%= link_to shift.date.strftime("%m/%d"), shift_path(shift) %></td>
+                <td><%= link_to shift.employee.name, employee_path(shift.employee) %></td>
+                <td><%= shift.store.name %></td>
+                <td><%= shift.start_time.strftime("%l:%M %P") %></td>
+                <td><%= shift.end_time.strftime("%l:%M %P") %></td>
+            </tr>
+            <% end %>
+        </table>
+        <p class="supertiny"></p>
+        <br />
+        <% end %>
+    </div>
+    </div>
+
+  
+
+    
+    <div class="card">
+    <div class="card-content">
+        <h4>Upcoming Shifts</h4>
+
+        <% if @upcoming_shifts.empty? %>
+        <p>You have no upcoming shifts at this time.</p>
+        <% else %>
+
+        <table class="striped highlight">
+            <thead>
+            <th>Date</th>
+            <th>Employee</th>
+            <th>Location</th>
+            <th>Starting</th>
+            <th>Ending</th>
+            </thead>
+            <% @upcoming_shifts.each do |shift| %>
+            <tr>
+                <td><%= link_to shift.date.strftime("%m/%d"), shift_path(shift) %></td>
+                <td><%= link_to shift.employee.name, employee_path(shift.employee) %></td>
+                <td><%= shift.store.name %></td>
+                <td><%= shift.start_time.strftime("%l:%M %P") %></td>
+                <td><%= shift.end_time.strftime("%l:%M %P") %></td>
+            </tr>
+            <% end %>
+        </table>
+        <p class="supertiny"></p>
+        <br />
+        <%= will_paginate @upcoming_shifts, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+        <% end %>
+    </div>
+    </div>
+</div>
+</div>
+</div>

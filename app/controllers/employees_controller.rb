@@ -30,6 +30,7 @@ class EmployeesController < ApplicationController
     retrieve_employee_assignments
     @upcoming_shifts = Shift.for_employee(@employee).for_next_days(7).chronological
     @recent_shifts = Shift.for_employee(@employee).for_past_days(7).chronological
+    @missed_shifts = Shift.for_employee(@employee).pending.past.chronological
   end
 
   def new
