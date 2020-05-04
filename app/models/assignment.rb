@@ -50,6 +50,11 @@ class Assignment < ApplicationRecord
     end
   end
 
+  # for simple forms
+  def name
+    "#{self.employee.name} at #{self.store.name}"
+  end
+
   private
   def end_previous_assignment
     current_assignment = Employee.find(self.employee_id).current_assignment
