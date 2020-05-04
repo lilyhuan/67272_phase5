@@ -13,15 +13,18 @@
 
 <h2>A&M Creamery Home</h2>
 
-<p>This is our very creative home page.</p>
-<p>Now go away.</p>
-
 
 <div class="container">
 <div class="row">
   <div class="small-8 columns">
     <div class="card">
     <div class="card-content">
+    <%= image_tag 'ice-cream-sundae.jpg', class: 'image-left' %>
+
+    <br><br>
+    <p>Welcome to A&M Creamery, short for Alex and Mark Creamery. Our store is famous for its delicious ice cream and unique flavors reflecting our home city of Pittsburgh. Feel free to stop by one of our 7 stores.
+        </p>
+        <br><br>
         <h4>Come Visit a Store!</h4>
 
         <% if @active_stores.empty? %>
