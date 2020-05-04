@@ -10,24 +10,30 @@
         <thead>
           <th>Date</th>
           <th>Employee</th>
+          <th>Store</th>
           <th>Starting</th>
+          <% unless current_user.role?(:employee) %>
           <th>Options</th>
+          <% end %>
         </thead>
         <% shifts.each do |shift| %>
           <tr %>
             <td><%= link_to shift.date.strftime("%-m/%-d"), shift_path(shift) %></td>
             <td><%= link_to shift.employee.name, employee_path(shift.employee) %></td>
-            
+            <td><%= shift.store.name %></td>
             <td><%= shift.start_time.strftime("%l:%M %P") %></td>
 
             <td>
+              <% if can? :edit, shift %>
               <%= link_to edit_shift_path(shift) do %>
                 <i class="material-icons">edit</i>
               <% end %>
+              <% end %>
             
-
+              <% if can? :delete, shift %>
             <%= link_to(shift_path(shift), method: :delete, data: { confirm: 'Are you sure you wish to delete this shift?' }) do %>
                 <i class="material-icons">delete</i>
+            <% end %>
             <% end %>
             </td>
           </tr>
