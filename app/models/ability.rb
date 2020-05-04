@@ -18,6 +18,7 @@ class Ability
         can :index, Store
         can :index, Assignment
         can :index, Employee
+        can :index, Job
   
   
         # they can read their own store
