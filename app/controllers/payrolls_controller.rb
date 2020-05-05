@@ -1,4 +1,4 @@
-class PayrollController < ApplicationController
+class PayrollsController < ApplicationController
     before_action :set, only: [:show, :edit, :update, :destroy]
     before_action :check_login
 
@@ -22,18 +22,26 @@ class PayrollController < ApplicationController
     end
 
     def new
-        date_range = DateRange.new(params[:start_date], params[:end_date])
+        # date_range = DateRange.new(params[:start_date], params[:end_date])
+        # @payroll = PayrollCalculator.new(DateRange.new(1.week.ago.to_date, Date.current))
+        # @store = Store.find(params[:store_id])
         @payroll = PayrollCalculator.new(DateRange.new(1.week.ago.to_date, Date.current))
-        @store = Store.find(params[:store_id])
-        
+
     end
   
     def create
-        @store = Store.find(params[:store_id])
-        # render action: 'new', locals: { store: @store }
+        # @store = Store.find(params[:store_id])
+        # # render action: 'new', locals: { store: @store }
 
-        @payroll = PayrollCalculator.new(DateRange.new(1.week.ago.to_date, Date.current))
-        redirect_to @payroll, notice: "Successfully created payroll"
+        # @payroll = PayrollCalculator.new(DateRange.new(1.week.ago.to_date, Date.current))
+        # redirect_to @payroll, notice: "Successfully created payroll"
+
+        @payroll = PayrollCalculator.new(payroll_params)
+        if @payroll.save
+            redirect_to payroll_path(@store)
+        else
+            render action: 'new'
+        end
     end
   
     private
@@ -48,6 +56,7 @@ class PayrollController < ApplicationController
     end
     
     def payroll_params
-        params.require(:payroll).permit(:start_date, :end_date)
+        # params.require(:payroll).permit(:start_date, :end_date)
+        params.require(:payroll).permit(:date_range)
       end
   end

@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :jobs
   resources :shift_jobs
 
-  resources :payroll
+  resources :payrolls
 
   # Authorizations
   resources :sessions

@@ -24,11 +24,7 @@
                   <td><%= emp.pay_earned %></td>
                 </tr>
               <% end %>
-              <tr>
-              <td></td>
-              <td>Total</td>
-              <td>???</td>
-              <tr>
+           
             </table>
 
               
@@ -54,12 +50,13 @@
       
       <select>
         <option value="" disabled selected>Deafult options</option>
-        <option value="1">Option 1</option>
-        <option value="2">Option 2</option>
-        <option value="3">Option 3</option>
+        <option value="1">Last Week</option>
+        <option value="2">Last 2 Weeks</option>
+        <option value="3">Last Month</option>
+        <option value="4">Last Year</option>
       </select>
 
-      <%= link_to "Generate", payroll_path(@store.id), class: "waves-effect waves-light btn" %>
+      <%= link_to "Generate", payroll_path(@store.id, start_date = start_date), class: "waves-effect waves-light btn" %>
       
           
 
