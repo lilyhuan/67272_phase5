@@ -11,7 +11,32 @@
   </div>
 </div>
 
+<% unless @missed_shifts.empty? %>
+<div class="card">
+  <div class="card-content">
+    <h5>Missed Shifts</h5>
 
+    <table class="striped highlight">
+      <thead>
+        <th>Date</th>
+        <th>Start Time</th>
+        <th>Duration</th>
+      </thead>
+      <% @missed_shifts.each do |shift| %>
+        <tr %>
+          <td><%= link_to shift.date.strftime("%-m/%-d/%y"), shift_path(shift) %></td>
+          <td><%= shift.start_time.strftime("%H:%M") %></td>
+          <td><%= shift.duration %></td>
+        </tr>
+      <% end %>
+    </table>
+    <p class="supertiny"></p>
+    <br />
+  </div>
+
+</div>
+
+<% end %>
 
 <% unless @pending_shifts.empty? %>
 <div class="card">
@@ -26,7 +51,7 @@
       </thead>
       <% @pending_shifts.each do |shift| %>
         <tr %>
-          <td><%= shift.date.strftime("%-m/%-d/%y") %></td>
+          <td><%= link_to shift.date.strftime("%-m/%-d/%y"), shift_path(shift) %></td>
           <td><%= shift.start_time.strftime("%H:%M") %></td>
           <td><%= shift.duration %></td>
         </tr>

@@ -57,7 +57,7 @@
             </thead>
             <% @upcoming_shifts.each do |shift| %>
             <tr>
-                <td><%= link_to shift.date, shift_path(shift) %></td>
+                <td><%= link_to shift.date.strftime("%m/%d"), shift_path(shift) %></td>
                 <td><%= link_to shift.employee.name, employee_path(shift.employee) %></td>
                 <td><%= shift.store.name %></td>
                 <td><%= shift.start_time.strftime("%l:%M %P") %></td>

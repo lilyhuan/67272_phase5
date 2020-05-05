@@ -21,9 +21,14 @@
     </table>
     <p class="supertiny"></p>
     <br />
+    <%= will_paginate @finished_shifts, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
   </div>
-
+  
 </div>
 <% else %>
-
+<div class="card">
+  <div class="card-content">
+  <p>There are no finished shifts at this time</p>
+  </div>
+ </div>
 <% end %>

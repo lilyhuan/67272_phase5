@@ -1,7 +1,14 @@
+<% ass = Array.new %>
+<% if current_user.role?(:admin) %>
+    <% ass = Assignment.current.chronological.to_a %>
+<% elsif current_user.role?(:manager) %>
+    <% ass = Assignment.for_store(current_user.current_assignment.store).current.chronological.to_a %>
+<% end %>
 
-<%= f.input :assignment_id, collection: Assignment.current.chronological.to_a, include_blank: true  %>
+<%= f.input :assignment_id, collection: ass, include_blank: true  %>
 <%= f.input :date, label_html: { class: 'active' } %>
 <%= f.input :start_time, input_html: { class: 'timepicker' } %>
 <%= f.input :notes, label_html: { class: 'active' } %>
 
 <%= f.input :status, collection: Shift::STATUS_LIST, include_blank: true %>
+

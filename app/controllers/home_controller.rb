@@ -12,9 +12,13 @@ class HomeController < ApplicationController
       
         @my_employees = Assignment.for_store(current_user.current_assignment.store).current.map{|s| s.employee}
         @my_employees = @my_employees.sort_by{ |x| x.last_name }
+
+
+        @upcoming_shift_self = Shift.for_employee(current_user).for_dates(DateRange.new(Date.tomorrow, Date.current)).chronological
+        @shift_today_self = Shift.for_employee(current_user).for_dates(DateRange.new(Date.current, Date.current))
       
       else
-        @upcoming_shifts = Shift.for_employee(current_user).upcoming.pending.chronological
+        @upcoming_shifts = Shift.for_employee(current_user).for_dates(DateRange.new(Date.tomorrow, Date.current)).chronological
         @shifts_today = Shift.for_employee(current_user).for_dates(DateRange.new(Date.current, Date.current))
       end
     else

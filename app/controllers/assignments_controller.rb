@@ -15,9 +15,10 @@ class AssignmentsController < ApplicationController
   end
 
   def show
-    @finished_shifts = @assignment.shifts.finished
-    @pending_shifts = @assignment.shifts.pending
-    @started_shifts = @assignment.shifts.started
+    @finished_shifts = @assignment.shifts.finished.chronological.paginate(page: params[:page]).per_page(10)
+    @pending_shifts = @assignment.shifts.for_dates(DateRange.new(Date.tomorrow, 1.week.from_now.to_date)).chronological
+    @missed_shifts = @assignment.shifts.past.pending.chronological
+    @started_shifts = @assignment.shifts.started.chronological
   end
 
   def new

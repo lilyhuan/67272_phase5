@@ -19,6 +19,7 @@ class Ability
         can :index, Assignment
         can :index, Employee
         can :index, Job
+        can :show, Job
   
   
         # they can read their own store
