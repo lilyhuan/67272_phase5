@@ -14,6 +14,8 @@ class StoresController < ApplicationController
     @current_managers = @store.assignments.current.map{|a| a.employee}.sort_by{|e| e.name}.select{|e| e.role == 'manager'}
     @current_employees = @store.assignments.current.map{|a| a.employee}.sort_by{|e| e.name}
     @shifts = @store.shifts.for_next_days(7).chronological.paginate(page: params[:page]).per_page(10)
+    @missed_shifts = @store.shifts.past.pending.chronological.paginate(page: params[:mpage]).per_page(10)
+    @shifts_today = @store.shifts.for_dates(DateRange.new(Date.current, Date.current)).paginate(page: params[:tpage]).per_page(10)
   end
 
   def new

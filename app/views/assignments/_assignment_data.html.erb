@@ -40,9 +40,15 @@
   </div>
 </div>
 <% else %>
-<div class="card grey lighten-3">
+<div class="card">
+  <div class="card-content">
+  <p>There are no upcoming shifts at this time</p>
+  </div>
+  <div class="card grey lighten-3">
+
   <div class="card-action">
     <%= link_to "New Shift", new_shift_path(assignment_id: @assignment.id) %>
   </div>
+</div>
 </div>
 <% end %>

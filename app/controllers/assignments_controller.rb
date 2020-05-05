@@ -1,5 +1,5 @@
 class AssignmentsController < ApplicationController
-  before_action :set_assignment, only: [:show, :edit, :terminate, :destroy]
+  before_action :set_assignment, only: [:show, :edit, :update, :terminate, :destroy]
   before_action :check_login
   authorize_resource
 
@@ -43,6 +43,17 @@ class AssignmentsController < ApplicationController
   def destroy
     @assignment.destroy
     redirect_to assignments_path, notice: "Removed assignment from the system."
+  end
+
+  def edit
+  end
+
+  def update
+    if @assignment.update_attributes(assignment_params)
+      redirect_to @assignment, notice: "Updated #{@assignment.employee.proper_name}'s assignment."
+    else
+      render action: 'edit'
+    end
   end
 
   private

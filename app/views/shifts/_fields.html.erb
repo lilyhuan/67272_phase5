@@ -1,5 +1,4 @@
-<% emp = Array.new %>
-<% Assignment.current.each {|a| emp << a.employee.name } %>
+
 <%= f.input :assignment_id, collection: Assignment.current.chronological.to_a, include_blank: true  %>
 <%= f.input :date, label_html: { class: 'active' } %>
 <%= f.input :start_time, input_html: { class: 'timepicker' } %>
