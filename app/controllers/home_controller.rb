@@ -53,6 +53,9 @@ class HomeController < ApplicationController
     @query = params[:query]
     @employees = Employee.search(@query)
     @total_hits = @employees.size
+    if @total_hits == 1
+      redirect_to employee_path(@employees.first)
+    end
   end
   
 end

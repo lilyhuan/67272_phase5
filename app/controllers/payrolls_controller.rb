@@ -26,6 +26,7 @@ class PayrollsController < ApplicationController
         # @payroll = PayrollCalculator.new(DateRange.new(1.week.ago.to_date, Date.current))
         # @store = Store.find(params[:store_id])
         @payroll = PayrollCalculator.new(DateRange.new(1.week.ago.to_date, Date.current))
+        @store = params[:store_id] unless params[:store_id].nil?
 
     end
   
@@ -56,7 +57,7 @@ class PayrollsController < ApplicationController
     end
     
     def payroll_params
-        # params.require(:payroll).permit(:start_date, :end_date)
-        params.require(:payroll).permit(:date_range)
+        params.require(:payroll).permit(:start_date, :end_date, :store_id)
+        # params.require(:payroll).permit(:date_range)
       end
   end
