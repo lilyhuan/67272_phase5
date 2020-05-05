@@ -1,5 +1,12 @@
 class HomeController < ApplicationController
   def index
+    @active_stores = Store.active.alphabetical.paginate(page: params[:page]).per_page(10)
+
+
+  end
+
+  def dashboard
+
     if logged_in?
       @active_stores = Store.active.alphabetical.paginate(page: params[:page]).per_page(10)
       @underage = Employee.younger_than_18.alphabetical
@@ -25,14 +32,13 @@ class HomeController < ApplicationController
     else
       @active_stores = Store.active.alphabetical.paginate(page: params[:page]).per_page(10)
     end
-
   end
 
   def clock_in
     @shift = Shift.find(params[:id])
     @time_clock = TimeClock.new(@shift)
     if @time_clock.start_shift_at(Time.now)
-      redirect_to home_path, notice: "Shift clocked in."
+      redirect_to dashboard_path, notice: "Shift clocked in."
     end
   end
 
@@ -40,7 +46,7 @@ class HomeController < ApplicationController
     @shift = Shift.find(params[:id])
     @time_clock = TimeClock.new(@shift)
     if @time_clock.end_shift_at(Time.now)
-      redirect_to home_path, notice: "Shift clocked out."
+      redirect_to dashboard_path, notice: "Shift clocked out."
     end
   end
 
@@ -54,7 +60,7 @@ class HomeController < ApplicationController
   end
 
   def search
-    redirect_back(fallback_location: home_path) if params[:query].blank?
+    redirect_back(fallback_location: dashboard_path) if params[:query].blank?
     @query = params[:query]
     @employees = Employee.search(@query)
     @total_hits = @employees.size
