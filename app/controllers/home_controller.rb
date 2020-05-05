@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   def index
     if logged_in?
       @active_stores = Store.active.alphabetical.paginate(page: params[:page]).per_page(10)
+      @underage = Employee.younger_than_18.alphabetical
       @issues = Array.new
       Store.active.alphabetical.each{ |s| @issues << s.shifts.past.select{|x| x.status == 'pending'}.count}
       if current_user.role?(:manager)
