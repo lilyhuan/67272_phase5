@@ -6,7 +6,7 @@ module Populator
     #   # create 200 general employees
       count = 0
       all_employees = Array.new
-      140.times do
+      100.times do
         count += 1
         puts " -- created #{count} employees" if (count % 10).zero?
         first_name = Faker::Name.first_name

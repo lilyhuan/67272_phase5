@@ -15,7 +15,7 @@ module Populator
 
       all_employees.each do |employee|
         assignment = employee.current_assignment
-        num_past = rand(15..50)
+        num_past = rand(15..30)
         num_upcoming = rand(6)
         # create past shifts
         (1..num_past).each do |i|
