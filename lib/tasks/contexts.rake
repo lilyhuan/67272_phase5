@@ -13,6 +13,7 @@ namespace :db do
 
     # Now go get the contexts and run the build all method
     require 'factory_bot_rails'
+    require 'faker'
     require './test/contexts'
     include Contexts
     create_all

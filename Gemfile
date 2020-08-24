@@ -50,6 +50,7 @@ gem 'jquery-ui-rails', '6.0.1'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'factory_bot_rails'
+gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -61,7 +62,6 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'meta_request'
   gem 'hirb'
-  gem 'faker'
   gem 'populator'
   gem 'simplecov'
   gem 'shoulda', '3.5.0'
