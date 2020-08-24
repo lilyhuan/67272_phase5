@@ -49,6 +49,8 @@ gem 'jquery-ui-rails', '6.0.1'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'factory_bot_rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -61,7 +63,6 @@ group :development, :test do
   gem 'hirb'
   gem 'faker'
   gem 'populator'
-  gem 'factory_bot_rails'
   gem 'simplecov'
   gem 'shoulda', '3.5.0'
   gem 'shoulda-matchers', '2.8.0'
