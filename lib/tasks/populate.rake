@@ -8,10 +8,10 @@ namespace :db do
     include Populator
 
     # Step 0: Reset of the databases (restart from scratch)
-    Rake::Task['db:drop'].invoke
-    Rake::Task['db:create'].invoke
+    # Rake::Task['db:drop'].invoke
+    # Rake::Task['db:create'].invoke
     Rake::Task['db:migrate'].invoke
-    Rake::Task['db:test:prepare'].invoke
+    # Rake::Task['db:test:prepare'].invoke
     puts 'Reset the dev and test databases'
 
     # Step 1: Create stores, pay grades, pay rates, and jobs
