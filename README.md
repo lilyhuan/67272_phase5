@@ -1,7 +1,7 @@
 67-272: Creamery Project (Spring 2020)
 ===
 
-This is project created for 67-272: Application Design and Development.
+This is a project created for 67-272: Application Design and Development.
 
 This particular version is in Rails 5.2.7 because of some callback bugs in the current 6.0 version of Rails.
 
